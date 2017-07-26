@@ -20,4 +20,4 @@ done
 
 export ZOO_SERVERS
 
-exec /zoo_myid_start.sh $(curl -s rancher-metadata.rancher.internal/2015-12-19/self/container/name | awk -F- '{print $NF}'
+exec /zoo_myid_start.sh $(curl -s rancher-metadata.rancher.internal/2015-12-19/self/container/name | awk -F- '{print $NF}')
