@@ -1,5 +1,23 @@
 #!/bin/bash 
 
+
+#Generate zoo.conf
+
+cat > /etc/zookeeper/conf/zoo.cfg << EOF
+tickTime=2000
+dataDir=/var/lib/zookeeper/
+clientPort=2181
+initLimit=5
+syncLimit=2
+EOF
+
+licznik=1
+for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesosphere-mesos/services/zookeeper/containers/ | awk -F= '{print $2}')
+do
+	echo "server.${licznik}=$(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesosphere-mesos/services/zookeeper/containers/${i}/primary_ip):2888:3888" >> /etc/zookeeper/conf/zoo.cfg
+	licznik=$(($licznik+1))
+done
+
 #Obrain the IPs of ZK instances
 
 ZK_IPs=","
