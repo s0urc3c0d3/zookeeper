@@ -1,6 +1,12 @@
 #!/bin/bash 
 
 
+cron 
+crontab -r
+echo "*/5 * * * * /gen_hosts.sh > /etc/hosts" > /tmp/mycron 
+crontab /tmp/mycron
+
+
 #Generate zoo.conf
 
 cat > /etc/zookeeper/conf/zoo.cfg << EOF
