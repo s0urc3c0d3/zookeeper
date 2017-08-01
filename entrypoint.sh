@@ -44,4 +44,6 @@ done
 
 export ZOO_SERVERS
 
+java -jar /opt/exhibitor/exhibitor.jar --port 8181 --defaultconfig /opt/exhibitor/defaults.conf -c file --hostname $(hostname) &
+
 exec /zoo_myid_start.sh $(curl -s rancher-metadata.rancher.internal/2015-12-19/self/container/name | awk -F- '{print $NF}')
