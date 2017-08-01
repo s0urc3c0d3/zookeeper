@@ -18,9 +18,9 @@ syncLimit=2
 EOF
 
 licznik=1
-for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesosphere-mesos/services/zookeeper/containers/ | awk -F= '{print $2}')
+for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesos/services/zookeeper/containers/ | awk -F= '{print $2}')
 do
-	echo "server.${licznik}=$(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesosphere-mesos/services/zookeeper/containers/${i}/primary_ip):2888:3888" >> /etc/zookeeper/conf/zoo.cfg
+	echo "server.${licznik}=$(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesos/services/zookeeper/containers/${i}/primary_ip):2888:3888" >> /etc/zookeeper/conf/zoo.cfg
 	licznik=$(($licznik+1))
 done
 
@@ -28,9 +28,9 @@ done
 
 ZK_IPs=","
 
-for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesosphere-mesos/services/zookeeper/containers/ | awk -F= '{print $2}')
+for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesos/services/zookeeper/containers/ | awk -F= '{print $2}')
 do
-        ZK_IPs="${ZK_IPs} $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesosphere-mesos/services/zookeeper/containers/${i}/primary_ip):2181Y$(echo $i | awk -F- '{print $NF}')"
+        ZK_IPs="${ZK_IPs} $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/mesos/services/zookeeper/containers/${i}/primary_ip):2181Y$(echo $i | awk -F- '{print $NF}')"
 done
 
 ZOO_SERVERS=""
